@@ -1,5 +1,17 @@
 # umi project
 
+## 主依赖版本
+
+react: 16.12.0
+
+umi: 3.2.3
+
+antd: 4.3.3
+
+umi-request: 1.3.3
+
+@umijs/hooks: 1.9.3
+
 ## 开始
 
 安装依赖
