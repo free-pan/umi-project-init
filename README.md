@@ -4,11 +4,11 @@
 
 react: 16.12.0
 
-umi: 3.2.3
+umi: 3.2.16
 
-antd: 4.3.3
+antd: 4.6.1
 
-umi-request: 1.3.3
+umi-request: 1.3.5
 
 @umijs/hooks: 1.9.3
 
