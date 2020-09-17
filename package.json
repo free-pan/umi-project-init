@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "umi dev",
+    "start": "cross-env publicPath=public/ umi dev",
     "build": "umi build",
     "postinstall": "umi generate tmp",
     "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@umijs/hooks": "^1.9.3",
-    "antd": "^4.6.1",
+    "antd": "^4.6.4",
     "prop-types": "^15.7.2",
     "qs": "^6.9.4",
     "react": "^16.12.0",
