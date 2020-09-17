@@ -1,7 +1,20 @@
 import React, { memo, useEffect, useState } from 'react';
 import styles from './Index.less';
 
-interface IndexProps {}
+interface RouteProps {
+  /**
+   * 当前路由的路径
+   */
+  path: string;
+  /**
+   * 路由路径是否需要完全匹配
+   */
+  exact: boolean;
+}
+
+interface IndexProps {
+  route: RouteProps;
+}
 
 const Index: React.FC<IndexProps> = (props) => {
   const [val, setVal] = useState<string>('');
