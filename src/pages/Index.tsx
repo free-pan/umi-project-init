@@ -106,7 +106,9 @@ const Index: React.FC<IndexProps> = (props) => {
   };
   const insertValue = () => {
     // @ts-ignore
-    vditor.insertValue('我在这里!');
+    vditor.insertValue(
+      '![图片](https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png)',
+    );
   };
   const deleteValue = () => {
     // @ts-ignore
