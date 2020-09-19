@@ -1,5 +1,7 @@
 # umi project
 
+该分支主要用于演示markdown编辑器`vditor`的使用
+
 ## 项目地址
 
 [github地址](https://github.com/free-pan/umi-project-init)
@@ -17,6 +19,8 @@ antd: 4.6.1
 umi-request: 1.3.5
 
 @umijs/hooks: 1.9.3
+
+vditor: ^3.5.3
 
 ## 开始
 
