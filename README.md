@@ -1,5 +1,11 @@
 # umi project
 
+## 项目地址
+
+[github地址](https://github.com/free-pan/umi-project-init)
+
+[gitee地址](https://gitee.com/free_pan/umi-project-init.git)
+
 ## 主依赖版本
 
 react: 16.12.0
@@ -31,6 +37,10 @@ yarn start
 ### public
 
 静态资源目录, 打包时, 会将该文件夹中的内容直接复制到打包文件夹的根目录下. web访问时也直接是`/`目录`
+
+### src/layouts
+
+布局文件夹
 
 ### src/components
 
@@ -73,3 +83,7 @@ typescript配置文件
 ### webstorm.config.js
 
 webstorm配置文件, 让webstorm能够识别`import ...`时使用的别名
+
+### global.less
+
+全局样式文件
