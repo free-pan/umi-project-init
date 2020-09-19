@@ -1,5 +1,7 @@
 # umi project
 
+该分支主要是实现一个通用的后台管理框架
+
 ## 项目地址
 
 [github地址](https://github.com/free-pan/umi-project-init)
@@ -17,6 +19,8 @@ antd: 4.6.1
 umi-request: 1.3.5
 
 @umijs/hooks: 1.9.3
+
+@ant-design/pro-layout: ^6.4.11
 
 ## 开始
 
