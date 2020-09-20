@@ -7,6 +7,7 @@ import qs from 'qs';
  */
 const defaultTimeout = 10;
 
+// @ts-ignore
 const errorHandler = function (error) {
   const { response = {}, message = '', data = {} } = error;
   console.log('error response', response);
@@ -64,7 +65,7 @@ export default {
    * @returns {Promise<any>}
    */
   formPost(
-    url,
+    url: string,
     data = {},
     {
       useCache = false,
@@ -93,7 +94,7 @@ export default {
    * @param getResponse {boolean} 是否包含响应头信息. 默认:false
    */
   bodyPost(
-    url,
+    url: string,
     data = {},
     {
       useCache = false,
@@ -123,7 +124,7 @@ export default {
    * @return 结果中默认含响应头, 获取响应头方式: request('/api/v1/some/api', { getResponse: true })..then(({ data, response}) => { response.headers.get('Content-Type'); })
    */
   bodyPostDownload(
-    url,
+    url: string,
     data = {},
     {
       useCache = false,
@@ -153,7 +154,7 @@ export default {
    * @returns {Promise<any>}
    */
   formPatch(
-    url,
+    url: string,
     data = {},
     {
       useCache = false,
@@ -182,7 +183,7 @@ export default {
    * @param getResponse {boolean} 是否包含响应头信息. 默认:false
    */
   bodyPatch(
-    url,
+    url: string,
     data = {},
     {
       useCache = false,
@@ -212,7 +213,7 @@ export default {
    * @return 结果中默认不包含响应头,如果需要包含响应头,请设置 getResponse 为 true
    */
   bodyPut(
-    url,
+    url: string,
     data = {},
     {
       useCache = false,
@@ -240,7 +241,7 @@ export default {
    * @return 结果中默认不包含响应头,如果需要包含响应头,请设置 getResponse 为 true
    */
   formPut(
-    url,
+    url: string,
     data = {},
     {
       useCache = false,
@@ -268,7 +269,7 @@ export default {
    * @return 结果中默认不包含响应头,如果需要包含响应头,请设置 getResponse 为 true
    */
   delete(
-    url,
+    url: string,
     data = {},
     {
       useCache = false,
@@ -296,7 +297,7 @@ export default {
    * @return 结果中默认不包含响应头,如果需要包含响应头,请设置 getResponse 为 true
    */
   get(
-    url,
+    url: string,
     data = {},
     {
       useCache = false,
@@ -324,8 +325,8 @@ export default {
    * @return 结果中默认不包含响应头,如果需要包含响应头,请设置 getResponse 为 true
    */
   upload(
-    url,
-    formData,
+    url: string,
+    formData: any,
     { timeout = defaultTimeout, headers = {}, getResponse = false } = {},
   ) {
     return extendRequest(url, {

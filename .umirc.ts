@@ -6,11 +6,27 @@ export default defineConfig({
   },
   routes: [
     {
-      component: '@/layouts/Index',
+      path: '/page',
+      component: '@/layouts/LoginLayout',
       routes: [
         {
-          path: '/',
+          path: 'login',
+          component: '@/pages/Login',
+        },
+        {
+          path: 'register',
+          component: '@/pages/Register',
+        },
+      ],
+    },
+    {
+      component: '@/layouts/Index',
+      path: '/',
+      routes: [
+        {
+          path: 'index',
           component: '@/pages/Index',
+          wrappers: ['@/wrappers/Auth'],
         },
       ],
     },
