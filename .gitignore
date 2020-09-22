@@ -555,3 +555,4 @@ src/.umi
 
 .npmrc
 package-lock.json
+.yarnrc
