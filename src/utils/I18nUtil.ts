@@ -1,18 +1,43 @@
+import zhCN from 'antd/es/locale/zh_CN';
+import enUS from 'antd/es/locale/en_US';
+import { Locale } from 'antd/lib/locale-provider';
+
 /**
- * 根据id,从i18nResource中获取国际化消息值,如果值不存在,则使用defaultMessage作为默认值
- * @param i18nResource 国际化资源
- * @param id 国际化资源key
- * @param defaultMessage 国际化资源值不存在时,使用的默认值
+ * 国际化资源映射
  */
-export function formatMessage(
-  i18nResource: object,
-  { id, defaultMessage }: { id: string; defaultMessage: string },
-) {
-  let message = defaultMessage;
+export const I18N_MAPPING = {
+  'zh-CN': zhCN,
+  'en-US': enUS,
+};
+/**
+ * 默认的区域编码
+ */
+export const DEFAULT_LANGUAGE_CODE = 'zh-CN';
+
+const LANGUAGE_CODE_SESSION_STAGE_KEY = 'language_code';
+
+/**
+ * 根据国际化编码获取Locale对象
+ * @param code 区域编码
+ */
+export function loadLocaleByCode(code: string): Locale {
   // @ts-ignore
-  if (i18nResource && i18nResource[id]) {
-    // @ts-ignore
-    message = i18nResource[id];
-  }
-  return message;
+  return I18N_MAPPING[code];
+}
+
+/**
+ * 从sessionStage中获取,区域语言编码,如果不存在,则返回默认的区域语言编码
+ */
+export function getLanguageCode(): string {
+  let languageCode = sessionStorage.getItem(LANGUAGE_CODE_SESSION_STAGE_KEY);
+  languageCode = languageCode ? languageCode : DEFAULT_LANGUAGE_CODE;
+  return languageCode;
+}
+
+/**
+ * 设置区域语言编码(最终会保存到sessionStage中)
+ * @param languageCode 区域语言编码
+ */
+export function setLanguageCode(languageCode: string) {
+  sessionStorage.setItem(LANGUAGE_CODE_SESSION_STAGE_KEY, languageCode);
 }

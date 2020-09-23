@@ -19,6 +19,7 @@ export default {
     code: '200',
     success: true,
     resp: {
+      loginTitle: '登录页',
       tabTitleA: '账号密码登录',
       tabTitleB: '手机号登录',
       accountPlaceholder: '账号...',
@@ -40,6 +41,7 @@ export default {
     code: '200',
     success: true,
     resp: {
+      loginTitle: 'Login Page',
       tabTitleA: 'Account password login',
       tabTitleB: 'Phone number login',
       accountPlaceholder: 'Account...',
