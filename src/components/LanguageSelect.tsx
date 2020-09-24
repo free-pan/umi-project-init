@@ -14,7 +14,7 @@ interface RouteProps {
   exact: boolean;
 }
 
-interface LanguageData {
+export interface LanguageData {
   name: string;
   code: string;
 }

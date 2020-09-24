@@ -9,6 +9,7 @@ import {
 } from '@ant-design/icons';
 import { Helmet } from 'umi';
 import { useTranslation } from 'react-i18next';
+import { history } from '@@/core/history';
 
 const { TabPane } = Tabs;
 
@@ -44,6 +45,7 @@ const Login: React.FC<LoginProps> = (props) => {
   // @ts-ignore
   const onFinish = (values) => {
     console.log(values);
+    history.push('/index');
   };
 
   const onReset = () => {

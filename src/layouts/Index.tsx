@@ -1,15 +1,11 @@
-import React, { memo, useEffect, useState } from 'react';
-import ProLayout, {
-  PageContainer,
-  MenuDataItem,
-  // eslint-disable-next-line import/no-unresolved
-} from '@ant-design/pro-layout';
-import { Avatar, Button, ConfigProvider, Spin } from 'antd';
+import React, { memo, useEffect } from 'react';
+import ProLayout, { MenuDataItem, PageContainer } from '@ant-design/pro-layout';
+import { ConfigProvider, Spin } from 'antd';
 import { useDispatch, useSelector } from 'dva';
 import { Icon } from '@ant-design/compatible';
 import { getLanguageCode, loadLocaleByCode } from '@/utils/I18nUtil';
 import { useTranslation } from 'react-i18next';
-import BizLanguageSelect from '@/components/BizLanguageSelect';
+import BizTopRightContentMenu from '@/components/BizTopRightContentMenu';
 
 interface IndexProps {
   children: any;
@@ -50,23 +46,10 @@ const Index: React.FC<IndexProps> = (props) => {
       children: children && loopMenuItem(children),
     }));
 
-  const rightContent = (
-    <div>
-      <a>
-        <Avatar
-          src="https://avatars1.githubusercontent.com/u/8186664?s=460&v=4"
-          style={{ display: 'inline-block' }}
-        />
-        <span>张三</span>
-      </a>
-      <BizLanguageSelect style={{ display: 'inline-block' }} />
-    </div>
-  );
-
   return (
     <ConfigProvider locale={loadLocaleByCode(languageCode)}>
       <ProLayout
-        rightContentRender={() => rightContent}
+        rightContentRender={() => <BizTopRightContentMenu />}
         menuContentRender={(_, dom) =>
           menuLoading ? (
             <div
