@@ -67,7 +67,7 @@ const TopRightContentMenu: React.FC<TopRightContentMenuProps> = (props) => {
 
   return (
     <div>
-      <Menu onClick={handleClick} mode="horizontal">
+      <Menu onClick={handleClick} mode="horizontal" selectedKeys={[]}>
         <Menu.Item key="notify">
           <Badge dot>
             <NotificationOutlined />

@@ -7,6 +7,7 @@ import { getLanguageCode, loadLocaleByCode } from '@/utils/I18nUtil';
 import { useTranslation } from 'react-i18next';
 import BizTopRightContentMenu from '@/components/BizTopRightContentMenu';
 import { history } from 'umi';
+import BizMenuBreadcrumb from '@/components/BizMenuBreadcrumb';
 
 interface IndexProps {
   children: any;
@@ -14,10 +15,14 @@ interface IndexProps {
 }
 
 const Index: React.FC<IndexProps> = (props) => {
-  console.log('props', props.route.path);
+  console.log('props', props.route.path, history.location.pathname);
   const { t } = useTranslation();
 
-  const [selectedMenuKey, setSelectedMenuKey] = useState<string>();
+  const [selectedMenuKey, setSelectedMenuKey] = useState<string>(
+    history.location.pathname,
+  );
+  const [openKeys, setOpenKeys] = useState<Array<string>>([]);
+
   const dispatch = useDispatch();
   const effectMethods = {
     searchMenuList: 'GlobalModel/searchMenuList',
@@ -50,6 +55,24 @@ const Index: React.FC<IndexProps> = (props) => {
       children: children && loopMenuItem(children),
     }));
 
+  const customHeader = (
+    <div
+      style={{
+        background: '#fff',
+        width: '100%',
+        height: '100%',
+        boxShadow: '0 1px 4px rgba(0, 21, 41, 0.08)',
+      }}
+    >
+      <div className={'middleBizMenuBreadcrumb'}>
+        <BizMenuBreadcrumb i18n={true} show={true} />
+      </div>
+      <div style={{ float: 'right' }}>
+        <BizTopRightContentMenu />
+      </div>
+    </div>
+  );
+
   // @ts-ignore
   // @ts-ignore
   return (
@@ -57,7 +80,7 @@ const Index: React.FC<IndexProps> = (props) => {
       <ProLayout
         fixedHeader={true}
         fixSiderbar={true}
-        rightContentRender={() => <BizTopRightContentMenu />}
+        headerRender={() => customHeader}
         menuContentRender={(_, dom) =>
           menuLoading ? (
             <div
@@ -78,6 +101,12 @@ const Index: React.FC<IndexProps> = (props) => {
         }}
         menuDataRender={() => loopMenuItem(menuList)}
         menuProps={{
+          onOpenChange: (keyArr) => {
+            // @ts-ignore
+            setOpenKeys([...keyArr]);
+          },
+          openKeys: openKeys,
+          selectedKeys: [selectedMenuKey],
           onClick: function ({ key, keyPath }) {
             // 菜单项点击
             console.log('key', key, 'keyPath', keyPath);

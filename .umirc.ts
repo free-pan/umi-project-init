@@ -21,14 +21,30 @@ export default defineConfig({
     },
     {
       component: '@/layouts/Index',
-      path: '/',
+      path: '/backend',
       routes: [
         {
           path: 'index',
           component: '@/pages/Index',
           wrappers: ['@/wrappers/Auth'],
         },
+        {
+          path: 'normal',
+          component: '@/pages/mgr/normal/NormalMgr',
+          wrappers: ['@/wrappers/Auth'],
+        },
+        {
+          path: '403',
+          component: '@/pages/exception/Page403',
+        },
+        {
+          path: '500',
+          component: '@/pages/exception/Page500',
+        },
       ],
+    },
+    {
+      component: '@/pages/exception/Page404',
     },
   ],
 });

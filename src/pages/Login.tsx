@@ -45,7 +45,7 @@ const Login: React.FC<LoginProps> = (props) => {
   // @ts-ignore
   const onFinish = (values) => {
     console.log(values);
-    history.push('/index');
+    history.push('/backend/index');
   };
 
   const onReset = () => {
