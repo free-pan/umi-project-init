@@ -25,7 +25,7 @@ i18n
       lng: getLanguageCode(),
       fallbackLng: getLanguageCode(),
       // 是否启用调试模式
-      debug: true,
+      debug: false,
       //
       load: 'currentOnly',
       backend: {
@@ -35,7 +35,6 @@ i18n
          * @param namespaces 名称空间
          */
         loadPath: function (lngs: Array<string>, namespaces: Array<string>) {
-          console.log(lngs, namespaces);
           return `http://localhost:8000/api/language/resource/${lngs[0]}`;
         },
         /**
