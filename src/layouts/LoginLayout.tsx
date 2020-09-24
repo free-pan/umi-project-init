@@ -31,7 +31,7 @@ const LoginLayout: React.FC<LoginLayoutProps> = (props) => {
 
   // @ts-ignore
   let languageCode = useSelector(
-    (state) => state.LanguageModel.selectedLanguageCode,
+    (state) => state.GlobalModel.selectedLanguageCode,
   );
   languageCode = languageCode ? languageCode : getLanguageCode();
 

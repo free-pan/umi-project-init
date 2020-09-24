@@ -23,6 +23,7 @@
     "root": true
   },
   "dependencies": {
+    "@ant-design/compatible": "^1.0.8",
     "@umijs/hooks": "^1.9.3",
     "antd": "^4.6.4",
     "i18next": "^19.7.0",

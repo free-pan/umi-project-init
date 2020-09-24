@@ -21,7 +21,7 @@ interface AuthProps {
 }
 
 const Auth: React.FC<AuthProps> = (props) => {
-  const isLogin = false;
+  const isLogin = true;
   console.log('Auth执行');
   if (isLogin) {
     // 登录则继续跳转

@@ -1,16 +1,21 @@
-import { searchLanguageList } from '@/services/LanguageService';
+import { searchLanguageList, searchMenuList } from '@/services/GlobalService';
 import { extractBizData } from '@/utils/AjaxResponseUtil';
 import { getLanguageCode } from '@/utils/I18nUtil';
 
 export default {
-  namespace: 'LanguageModel',
+  namespace: 'GlobalModel',
   state: {
     // 语言列表
     languageList: null,
     // 选中的语言编码
     selectedLanguageCode: getLanguageCode(),
+    // 菜单列表
+    menuList: [],
   },
   reducers: {
+    setMenuList(state: any, { payload: { menuList } }: { payload: any }) {
+      return { ...state, menuList };
+    },
     setLanguageList(
       state: any,
       { payload: { languageList } }: { payload: any },
@@ -25,6 +30,21 @@ export default {
     },
   },
   effects: {
+    *searchMenuList(
+      action: any,
+      {
+        put,
+        call,
+        select,
+      }: { put: Function; call: Function; select: Function },
+    ) {
+      const ajaxResp = yield call(searchMenuList);
+      const menuList = extractBizData(ajaxResp);
+      yield put({
+        type: 'setMenuList',
+        payload: { menuList },
+      });
+    },
     /**
      * 查询语言列表
      * @param action

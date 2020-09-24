@@ -24,14 +24,14 @@ const BizLanguageSelect: React.FC<BizLanguageSelectProps> = (props) => {
   const { i18n } = useTranslation();
   const { style } = props;
   const effectMethods = {
-    searchLanguageList: 'LanguageModel/searchLanguageList',
-    setSelectedLanguageCode: 'LanguageModel/setSelectedLanguageCode',
+    searchLanguageList: 'GlobalModel/searchLanguageList',
+    setSelectedLanguageCode: 'GlobalModel/setSelectedLanguageCode',
   };
 
   const dispatch = useDispatch();
 
   // @ts-ignore
-  let languageList = useSelector((state) => state.LanguageModel.languageList);
+  let languageList = useSelector((state) => state.GlobalModel.languageList);
 
   // 仅在组件第一次初始化时调用
   useEffect(() => {
