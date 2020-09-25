@@ -1,6 +1,7 @@
 import { searchLanguageList, searchMenuList } from '@/services/GlobalService';
 import { extractBizData } from '@/utils/AjaxResponseUtil';
 import { getLanguageCode } from '@/utils/I18nUtil';
+import { findAncestor } from '@/utils/MenuUtil';
 
 export default {
   namespace: 'GlobalModel',
@@ -11,8 +12,32 @@ export default {
     selectedLanguageCode: getLanguageCode(),
     // 菜单列表
     menuList: [],
+    // 面包屑数据
+    breadcrumbItemArr: [],
+    // 当前选中的菜单
+    currentSelectedMenuData: null,
   },
   reducers: {
+    /**
+     * 设置的选中的菜单和面包屑
+     * @param state
+     * @param selectedMenuItemPath
+     */
+    setSelectedMenuAndBreadcrumb(
+      state: any,
+      { payload: { selectedMenuItemPath } }: { payload: any },
+    ) {
+      const breadcrumbItemArr = findAncestor(
+        state.menuList,
+        selectedMenuItemPath,
+      );
+      let currentSelectedMenuData = null;
+      if (breadcrumbItemArr.length > 0) {
+        currentSelectedMenuData =
+          breadcrumbItemArr[breadcrumbItemArr.length - 1];
+      }
+      return { ...state, breadcrumbItemArr, currentSelectedMenuData };
+    },
     setMenuList(state: any, { payload: { menuList } }: { payload: any }) {
       return { ...state, menuList };
     },
@@ -31,7 +56,7 @@ export default {
   },
   effects: {
     *searchMenuList(
-      action: any,
+      { payload: { pathname } }: any,
       {
         put,
         call,
@@ -44,6 +69,12 @@ export default {
         type: 'setMenuList',
         payload: { menuList },
       });
+      if (pathname) {
+        yield put({
+          type: 'setSelectedMenuAndBreadcrumb',
+          payload: { selectedMenuItemPath: pathname },
+        });
+      }
     },
     /**
      * 查询语言列表

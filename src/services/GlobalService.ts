@@ -1,12 +1,5 @@
 import AjaxUtil from '@/utils/AjaxUtil';
 
-export interface MenuData {
-  path: string;
-  name: string;
-  i18n?: string;
-  children?: Array<MenuData>;
-}
-
 const searchLanguageListUrl = '/api/language';
 const searchMenuListUrl = '/api/menu';
 

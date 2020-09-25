@@ -1,24 +1,13 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import styles from './LoginLayout.less';
 
-import { Card, Layout, ConfigProvider } from 'antd';
-import LanguageSelect from '@/components/LanguageSelect';
-import { useDispatch, useSelector } from 'dva';
+import { Card, ConfigProvider, Layout } from 'antd';
+import { useSelector } from 'dva';
 import BizLanguageSelect from '@/components/BizLanguageSelect';
 import { getLanguageCode, loadLocaleByCode } from '@/utils/I18nUtil';
+import { RouteProps } from '@/services/Data';
 
 const { Header, Footer, Content } = Layout;
-
-interface RouteProps {
-  /**
-   * 当前路由的路径
-   */
-  path: string;
-  /**
-   * 路由路径是否需要完全匹配
-   */
-  exact: boolean;
-}
 
 interface LoginLayoutProps {
   route: RouteProps;

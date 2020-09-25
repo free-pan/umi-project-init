@@ -26,6 +26,7 @@ import UpdateForm, { FormValueType } from './components/UpdateForm';
 import CreateForm from './components/CreateForm';
 import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
 import { PlusOutlined, DownOutlined } from '@ant-design/icons';
+import PageTitle from '@/components/PageTitle';
 
 interface RouteProps {
   /**
@@ -184,7 +185,8 @@ const NormalMgr: React.FC<NormalMgrProps> = (props) => {
   ];
 
   return (
-    <PageContainer title={'你哈'} breadcrumb={{}}>
+    <PageContainer title={<PageTitle />} breadcrumb={{}}>
+      <PageTitle pureText={false} />
       <ProTable<TableListItem>
         headerTitle="查询表格"
         actionRef={actionRef}

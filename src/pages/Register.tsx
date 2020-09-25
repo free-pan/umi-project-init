@@ -1,17 +1,7 @@
 import React, { memo, useEffect, useState } from 'react';
 import styles from './Register.less';
 import { Helmet } from 'umi';
-
-interface RouteProps {
-  /**
-   * 当前路由的路径
-   */
-  path: string;
-  /**
-   * 路由路径是否需要完全匹配
-   */
-  exact: boolean;
-}
+import { RouteProps } from '@/services/Data';
 
 interface RegisterProps {
   route: RouteProps;

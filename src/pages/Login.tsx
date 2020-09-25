@@ -10,19 +10,9 @@ import {
 import { Helmet } from 'umi';
 import { useTranslation } from 'react-i18next';
 import { history } from '@@/core/history';
+import { RouteProps } from '@/services/Data';
 
 const { TabPane } = Tabs;
-
-interface RouteProps {
-  /**
-   * 当前路由的路径
-   */
-  path: string;
-  /**
-   * 路由路径是否需要完全匹配
-   */
-  exact: boolean;
-}
 
 interface LoginProps {
   route: RouteProps;

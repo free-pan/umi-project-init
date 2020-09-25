@@ -37,7 +37,6 @@ const TopRightContentMenu: React.FC<TopRightContentMenuProps> = (props) => {
   const { languageList, onLanguageChange } = props;
   const [visible, setVisible] = useState<boolean>(false);
   const handleClick = ({ domEvent, item, key, keyPath }: any) => {
-    console.log('click ', key, keyPath);
     if (key === 'exit') {
       setVisible(true);
       return;

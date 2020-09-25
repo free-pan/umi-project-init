@@ -1,21 +1,4 @@
-interface AjaxResponse {
-  /**
-   * 业务执行结果编码
-   */
-  code: string;
-  /**
-   * 业务是否执行成功
-   */
-  success: boolean;
-  /**
-   * 响应数据
-   */
-  resp: any;
-  /**
-   * 错误消息列表
-   */
-  msgList: Array<string>;
-}
+import { AjaxResponse } from '@/services/Data';
 
 /**
  * 提取响应数据

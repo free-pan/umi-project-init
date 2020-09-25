@@ -15,21 +15,20 @@ interface IndexProps {
 }
 
 const Index: React.FC<IndexProps> = (props) => {
-  console.log('props', props.route.path, history.location.pathname);
   const { t } = useTranslation();
 
-  const [selectedMenuKey, setSelectedMenuKey] = useState<string>(
-    history.location.pathname,
-  );
   const [openKeys, setOpenKeys] = useState<Array<string>>([]);
 
   const dispatch = useDispatch();
   const effectMethods = {
     searchMenuList: 'GlobalModel/searchMenuList',
+    setSelectedMenuAndBreadcrumb: 'GlobalModel/setSelectedMenuAndBreadcrumb',
   };
   // @ts-ignore
   const loadingEffect = useSelector((state) => state.loading);
+  // 获取菜单数据加载状态
   const menuLoading = loadingEffect.effects[effectMethods.searchMenuList];
+  // 获取菜单数据
   // @ts-ignore
   const menuList = useSelector((state) => state.GlobalModel.menuList);
 
@@ -43,7 +42,7 @@ const Index: React.FC<IndexProps> = (props) => {
   useEffect(() => {
     dispatch({
       type: effectMethods.searchMenuList,
-      payload: {},
+      payload: { pathname: history.location.pathname },
     });
   }, []);
 
@@ -55,6 +54,7 @@ const Index: React.FC<IndexProps> = (props) => {
       children: children && loopMenuItem(children),
     }));
 
+  // 自定义主框架header
   const customHeader = (
     <div
       style={{
@@ -65,7 +65,7 @@ const Index: React.FC<IndexProps> = (props) => {
       }}
     >
       <div className={'middleBizMenuBreadcrumb'}>
-        <BizMenuBreadcrumb i18n={true} show={true} />
+        <BizMenuBreadcrumb pathname={history.location.pathname} />
       </div>
       <div style={{ float: 'right' }}>
         <BizTopRightContentMenu />
@@ -73,8 +73,6 @@ const Index: React.FC<IndexProps> = (props) => {
     </div>
   );
 
-  // @ts-ignore
-  // @ts-ignore
   return (
     <ConfigProvider locale={loadLocaleByCode(languageCode)}>
       <ProLayout
@@ -97,7 +95,7 @@ const Index: React.FC<IndexProps> = (props) => {
         title="后台管理模板"
         logo="https://gw.alipayobjects.com/mdn/rms_b5fcc5/afts/img/A*1NHAQYduQiQAAAAAAAAAAABkARQnAQ"
         location={{
-          pathname: selectedMenuKey,
+          pathname: history.location.pathname,
         }}
         menuDataRender={() => loopMenuItem(menuList)}
         menuProps={{
@@ -106,12 +104,17 @@ const Index: React.FC<IndexProps> = (props) => {
             setOpenKeys([...keyArr]);
           },
           openKeys: openKeys,
-          selectedKeys: [selectedMenuKey],
-          onClick: function ({ key, keyPath }) {
-            // 菜单项点击
-            console.log('key', key, 'keyPath', keyPath);
-            // @ts-ignore
-            setSelectedMenuKey(key);
+          selectedKeys: [history.location.pathname],
+          /**
+           * 监听菜单项点击
+           * @param key
+           * @param keyPath
+           */
+          onClick: function ({ key, keyPath, item, domEvent }) {
+            dispatch({
+              type: effectMethods.setSelectedMenuAndBreadcrumb,
+              payload: { selectedMenuItemPath: key },
+            });
             history.push(key);
           },
         }}

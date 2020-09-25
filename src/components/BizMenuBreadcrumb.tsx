@@ -1,8 +1,7 @@
-import React, { memo, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'dva';
+import React, { memo } from 'react';
+import { useSelector } from 'dva';
 import MenuBreadcrumb from '@/components/MenuBreadcrumb';
-import { history } from 'umi';
-import { MenuData } from '@/services/GlobalService';
+import { MenuData } from '@/services/Data';
 
 interface RouteProps {
   /**
@@ -17,7 +16,7 @@ interface RouteProps {
 
 interface BizMenuBreadcrumbProps {
   /**
-   * 是否启用国际化. 默认:false
+   * 是否启用国际化. 默认:true
    */
   i18n?: boolean;
   /**
@@ -28,21 +27,25 @@ interface BizMenuBreadcrumbProps {
    * 额外加在面包屑头部的菜单
    */
   homeMenu?: MenuData;
+  /**
+   * 路由路径
+   */
+  pathname: string;
 }
 
 const BizMenuBreadcrumb: React.FC<BizMenuBreadcrumbProps> = (props) => {
-  const { show = true, i18n = false, homeMenu } = props;
-
-  const dispatch = useDispatch();
+  const { show = true, i18n = true, homeMenu, pathname } = props;
 
   // @ts-ignore
-  const menuList = useSelector((state) => state.GlobalModel.menuList);
+  const breadcrumbItemArr = useSelector(
+    (state) => state.GlobalModel.breadcrumbItemArr,
+  );
 
   return (
     <>
       <MenuBreadcrumb
-        menuList={menuList}
-        pathname={history.location.pathname}
+        menuList={breadcrumbItemArr}
+        pathname={pathname}
         i18n={i18n}
         show={show}
         homeMenu={homeMenu}

@@ -1,9 +1,9 @@
 import React, { memo, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'dva';
 import { Breadcrumb } from 'antd';
-import { MenuData } from '@/services/GlobalService';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'umi';
+import { MenuData } from '@/services/Data';
 
 interface RouteProps {
   /**
@@ -18,7 +18,7 @@ interface RouteProps {
 
 interface MenuBreadcrumbProps {
   /**
-   * 菜单数据
+   * 被作为面包屑展示的菜单数据
    */
   menuList?: Array<MenuData>;
   /**
@@ -38,29 +38,6 @@ interface MenuBreadcrumbProps {
    */
   show?: boolean;
 }
-
-/**
- * 根据 pathname,从 menuList 中查找匹配的节点,以及该节点所有的先辈节点
- * @param menuList
- * @param pathname
- */
-const findAncestor = (
-  menuList: Array<MenuData>,
-  pathname: string,
-): Array<MenuData> => {
-  for (let idx in menuList) {
-    if (menuList[idx].path === pathname) {
-      return [menuList[idx]];
-    } else if (menuList[idx].children) {
-      // @ts-ignore
-      const tmpArr = findAncestor(menuList[idx].children, pathname);
-      if (tmpArr && tmpArr.length > 0) {
-        return [menuList[idx], ...tmpArr];
-      }
-    }
-  }
-  return [];
-};
 
 const MenuBreadcrumb: React.FC<MenuBreadcrumbProps> = (props) => {
   const { show = true, homeMenu, menuList, pathname, i18n = false } = props;
@@ -87,21 +64,22 @@ const MenuBreadcrumb: React.FC<MenuBreadcrumbProps> = (props) => {
     }
   }
   if (menuList) {
-    const arr = findAncestor(menuList, pathname);
-    arr.map((item, idx) => {
+    menuList.map((item, idx) => {
       let name = item.name;
       if (i18n) {
         // @ts-ignore
         name = t(item.i18n);
       }
-      if (item.path && idx < arr.length - 1) {
+      if (item.path && idx < menuList.length - 1) {
         breadcrumbItemArr.push(
-          <Breadcrumb.Item>
+          <Breadcrumb.Item key={idx}>
             <Link to={item.path}>{name}</Link>
           </Breadcrumb.Item>,
         );
       } else {
-        breadcrumbItemArr.push(<Breadcrumb.Item>{name}</Breadcrumb.Item>);
+        breadcrumbItemArr.push(
+          <Breadcrumb.Item key={idx}>{name}</Breadcrumb.Item>,
+        );
       }
     });
   }
